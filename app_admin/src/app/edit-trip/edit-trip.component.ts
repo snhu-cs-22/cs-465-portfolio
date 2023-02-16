@@ -10,7 +10,7 @@ import { TripDataService } from 'services/trip-data.service';
   styleUrls: ['./edit-trip.component.css']
 })
 export class EditTripComponent implements OnInit {
-  
+
   editForm: FormGroup;
   submitted = false;
   constructor(
@@ -48,7 +48,7 @@ export class EditTripComponent implements OnInit {
     this.tripService.getTrip(tripCode)
       .then(data => {
         console.log(data);
-      // Don't use editForm.setValue() as it will throw console error
+        // Don't use editForm.setValue() as it will throw console error
         this.editForm.patchValue(data[0]);
       })
   }
@@ -64,4 +64,8 @@ export class EditTripComponent implements OnInit {
     }
   }
 
+  // get the form short name to access the form fields
+  get f() {
+    return this.editForm.controls;
+  }
 }

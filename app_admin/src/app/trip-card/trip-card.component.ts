@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Trip } from 'models/trip';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-trip-card',
@@ -11,9 +12,15 @@ export class TripCardComponent implements OnInit {
 
   @Input('trip') trip: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 
   private editTrip(trip: Trip): void {
@@ -25,7 +32,7 @@ export class TripCardComponent implements OnInit {
   private deleteTrip(trip: Trip): void {
     // TODO: make this a fancy modal window instead of window.confirm
     var confirm = window.confirm("Are you sure you want to delete this trip?");
-    
+
     if (confirm) {
       localStorage.removeItem("tripCode");
       localStorage.setItem("tripCode", trip.code);

@@ -43,3 +43,4 @@ process.on('SIGTERM', () => {
 });
 
 require('./models/travlr');
+require('./models/user');
